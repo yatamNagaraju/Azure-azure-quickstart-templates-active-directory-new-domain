@@ -50,7 +50,7 @@
 			"metadata": {
 				"description": "The location of resources, such as templates and DSC modules, that the template depends on"
 			},
-			"defaultValue": "[deployment().properties.templateLink.uri]"
+			"defaultValue": "https://github.com/yatamNagaraju/Azure-azure-quickstart-templates-active-directory-new-domain"
 		},
 		"virtualMachineName": {
 			"type": "string",
@@ -239,11 +239,11 @@
 				],
 				"properties": {
 					"publisher": "Microsoft.Powershell",
-					"type": "DSC",
+					"type": "DSC1",
 					"typeHandlerVersion": "2.19",
 					"autoUpgradeMinorVersion": true,
 					"settings": {
-						"ModulesUrl": "[uri(parameters('_artifactsLocation'), concat('DSC/CreateADPDC.zip'))]",
+						"ModulesUrl": "[uri(parameters('_artifactsLocation'), concat('DSC1/CreateADPDC.zip'))]",
 						"ConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
 						"Properties": {
 							"DomainName": "[parameters('domainName')]",
