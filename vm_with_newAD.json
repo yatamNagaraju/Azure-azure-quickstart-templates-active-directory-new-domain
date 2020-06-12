@@ -75,6 +75,13 @@
 				"description": "Subnet name."
 			}
 		},
+                "privateIPAddress": {
+                           "type": "string",
+                           "defaultValue": "10.0.0.4",
+                           "metadata": {
+                                    "description": "Private IP address."
+                        }
+                 },
 		"subnetRange": {
 			"type": "string",
 			"defaultValue": "10.0.0.0/24",
@@ -96,9 +103,9 @@
 				"description": "Availability set name."
 			}
 		},
-		"location": {
-			"type": "string"
-		}
+                "location": {
+                     "type": "string"
+                    }
 	},
 	"resources": [{
 			"type": "Microsoft.Network/publicIPAddresses",
@@ -196,12 +203,12 @@
 					"adminPassword": "[parameters('adminPassword')]"
 				},
 				"storageProfile": {
-					"imageReference": {
-						"publisher": "MicrosoftWindowsServer",
-						"offer": "WindowsServer",
-						"sku": "2016-Datacenter",
-						"version": "latest"
-					},
+                                       "imageReference": {
+                                       "publisher": "MicrosoftWindowsServer",
+                                       "offer": "WindowsServer",
+                                       "sku": "2016-Datacenter",
+                                       "version": "latest"
+                               },
 					"osDisk": {
 						"name": "[concat(parameters('virtualMachineName'),'_OSDisk')]",
 						"caching": "ReadOnly",
@@ -275,10 +282,15 @@
 					"subnetRange": {
 						"value": "[parameters('subnetRange')]"
 					},
-					"location": {
+                                        "DNSServerAddress": {
+                                                "value": [
+                                                    "[parameters('privateIPAddress')]"
+                                                  ]
+                                         },
+                                        "location": {
 						"value": "[parameters('location')]"
-					}
-
+                                        }
+                                        
 				}
 			}
 		}
