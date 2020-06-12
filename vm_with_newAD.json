@@ -33,18 +33,6 @@
 				"description": "Size of the VM for the controller"
 			}
 		},
-		"existingManagedImageResourceGroup": {
-			"type": "string",
-			"metadata": {
-				"description": " name of the existing image resource group"
-			}
-		},
-		"existingManagedImageName": {
-			"type": "string",
-			"metadata": {
-				"description": " name of the existing image"
-			}
-		},
 		"_artifactsLocation": {
 			"type": "string",
 			"metadata": {
@@ -108,12 +96,9 @@
 				"description": "Availability set name."
 			}
 		},
-                "location": {
-                     "type": "string"
-                    }
-	},
-	"Variables": {
-		"managedImageId": "[resourceId(parameters('existingManagedImageResourceGroup'), 'Microsoft.Compute/images', parameters('existingManagedImageName'))]"
+		"location": {
+			"type": "string"
+		}
 	},
 	"resources": [{
 			"type": "Microsoft.Network/publicIPAddresses",
@@ -212,7 +197,10 @@
 				},
 				"storageProfile": {
 					"imageReference": {
-						"id": "[variables('managedImageId')]"
+						"publisher": "MicrosoftWindowsServer",
+						"offer": "WindowsServer",
+						"sku": "2016-Datacenter",
+						"version": "latest"
 					},
 					"osDisk": {
 						"name": "[concat(parameters('virtualMachineName'),'_OSDisk')]",
@@ -287,10 +275,10 @@
 					"subnetRange": {
 						"value": "[parameters('subnetRange')]"
 					},
-                                        "location": {
+					"location": {
 						"value": "[parameters('location')]"
-                                        }
-                                        
+					}
+
 				}
 			}
 		}
